@@ -56,26 +56,28 @@ Julgou-se necessário a exportação de um dataframe para facilitar a análise d
 
 Também, simultaneamente ao registro dos sucessos de conexão feitos pelo script do cliente, um sniffing pelo WireShark foi colocado para atuar com o objetivo de registar as conversas entre os agentes de usuário. As conversas HTTP foram guardadas em valores separados por vírgula em um arquivo chamado ***ws\_pcap.csv***, também com o objetivo de análise do tráfego durante as requisições respostas entre os hosts. 
 
-A análise foi realizada utilizando um conjunto de soluções de console interativo de  Python denominada  Jupyter. O texto com os códigos está no arquivo ***analise\_pcap.ipynb***, e também o mesmo exportado para PDF no arquivo ***analise\_pcap.pdf***, para mais fácil leitura. 
+A análise foi realizada utilizando um conjunto de soluções de console interativo de  Python denominada  Jupyter. O texto com os códigos está no arquivo ***analise\_pcap.ipynb***. 
 
 # 5 – Resultados 
 
-É  possível  observar  no  texto  descrito  nos  arquivos  ***analise\_pcap.pdf***  ou ***analise\_pcap.ipynb*** que os registros gerados pelas requisições do cliente são da forma: 
+É  possível  observar  no  texto  descrito  no  arquivo ***analise\_pcap.ipynb*** que os registros gerados pelas requisições do cliente são da forma: 
 
 ![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.007.jpeg)
 
-Em que sim\_reqs é a coluna com o número de requisições simultâneas feitas ao servidor, taxa\_sucesso é a coluna de conexões bem-sucedidas: ![](Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.008.png)
+Em que sim\_reqs é a coluna com o número de requisições simultâneas feitas ao servidor, **taxa\_sucesso** é a coluna de conexões bem-sucedidas: 
 
-𝑡𝑎𝑥𝑎 𝑑𝑒 𝑠𝑢𝑐𝑒𝑠𝑠𝑜 = $$\frac{Respostas}{RequisiçõesEnviadas}$$
+![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.008.png)
+
+𝑡𝑎𝑥𝑎 𝑑𝑒 𝑠𝑢𝑐𝑒𝑠𝑠𝑜 = $\frac{Respostas}{RequisiçõesEnviadas}$
 
 
-ou  seja,  a  fração  de  respostas  recebidas  em  todas  as  requisições  enviadas  simultaneamente,  e tempo\_decorr é o tempo decorrido desde que a primeira requisição foi enviada até a última resposta não ser recebida. Isso de uma variedade de 1 até 100 requisições simultâneas, 5 vezes para cada sim\_req. 
+ou  seja,  a  fração  de  respostas  recebidas  em  todas  as  requisições  enviadas  simultaneamente,  e **tempo\_decorr** é o tempo decorrido desde que a primeira requisição foi enviada até a última resposta não ser recebida. Isso de uma variedade de 1 até 100 requisições simultâneas, 5 vezes para cada sim\_req. 
 
 O dataframe agrupado por classe de requisições simultâneas: 
 
 ![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.009.jpeg)
 
-e com a média aplicada sobre as colunas, demonstra que a taxa de sucesso cai tanto quanto o número de requisições simultâneas e paralelas aumenta. De fato, a partir da análise contida no PDF, é possível notar que a taxa de sucesso é máxima até 25 pedidos simultâneos. A partir de então, ou o servidor deixa de receber os pedidos, ou, tendo recebido o pedido, deixa de enviar as respostas. Além disso, o próprio tempo necessário para totalizar as conexões aumenta. 
+e com a média aplicada sobre as colunas, demonstra que a taxa de sucesso cai tanto quanto o número de requisições simultâneas e paralelas aumenta. De fato, a partir da análise contida no Notebook, é possível notar que a taxa de sucesso é máxima até 25 pedidos simultâneos. A partir de então, ou o servidor deixa de receber os pedidos, ou, tendo recebido o pedido, deixa de enviar as respostas. Além disso, o próprio tempo necessário para totalizar as conexões aumenta. 
 
 Uma  grandeza  talvez  interessante  de  se  observar  seria  o  número  de  requisições  bem- sucedidas feitas unidade de tempo. Do dataframe: 
 
@@ -99,7 +101,9 @@ Uma análise similar também pode ser encontrada no arquivo anexo quando se obse
 
 A capacidade montagem gráfica da mensagem enviada pelo servidor também foi testada. Quando se solicita uma página existente: 
 
-![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.015.jpeg)É exibida dessa maneira, e uma mensagem de controle é enviada por comunicação serial. Assim é com qualquer página desde a raiz até ***/99***: 
+![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.015.jpeg)
+
+É exibida dessa maneira, e uma mensagem de controle é enviada por comunicação serial. Assim é com qualquer página desde a raiz até ***/99***: 
 
 ![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.016.jpeg)
 
