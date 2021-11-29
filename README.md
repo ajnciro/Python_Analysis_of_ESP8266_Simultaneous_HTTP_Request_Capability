@@ -18,9 +18,7 @@ Entre os principais componentes do protocolo estão as requisições e as respos
 
 Uma mensagem de requisição sempre inclui na primeira linha o método aplicado ao recurso necessário, o identificador do recurso e a versão do protocolo utilizado, e esse método pode ser GET (para recuperar alguma informação), POST (para o envio de parâmetros dentro do corpo da requisição) ou HEAD (para obtenção de metainformação do servidor sem a necessidade de receber a entidade completa relacionada à página solicitada). 
 
-Uma mensagem de resposta enviada após uma requisição sempre inclui primeiro uma linha 
-
-de status com a versão do protocolo e um código de status, o qual pode ir no formato 1xx (Informativo, não utilizado em HTTP 1.0, mas em 1.1), 2xx (Sucesso), 3xx (Redirecionamento), 4xx (Erro no cliente) e 5xx  (Erro no servidor). 
+Uma mensagem de resposta enviada após uma requisição sempre inclui primeiro uma linha de status com a versão do protocolo e um código de status, o qual pode ir no formato 1xx (Informativo, não utilizado em HTTP 1.0, mas em 1.1), 2xx (Sucesso), 3xx (Redirecionamento), 4xx (Erro no cliente) e 5xx  (Erro no servidor). 
 
 Entre as principais diferenças entre o HTTP/1.0 e o HTTP/1.1 está a existência de conexões persistentes presentes no 1.1. Isto é dito, pois, como se verá a seguir, na depuração das mensagens trocadas entre cliente e o servidor implementado no projeto, aparecem respostas do tipo HTTP 1.1, porém como o cliente foi implementado de uma maneira que faz múltiplas requisições simultâneas sem necessidade de persistência, na prática se torna o servidor idêntico ao que se fosse construído sobre HTTP/1.0. 
 
@@ -36,7 +34,7 @@ Originalmente concebido para ser programado via comando AT, atualmente conta com
 
 # 4 – Procedimento Experimental 
 
-Um servidor web apto a responder requisições HTTP foi implementado sobre um módulo ESP8266 ligado a uma rede local. O código referente à implementação pode ser encontrado no arquivo ***ServidorHTTPEsp8266.txt***, o qual está devidamente comentado para melhor compreensão. 
+Um servidor web apto a responder requisições HTTP foi implementado sobre um módulo ESP8266 ligado a uma rede local. O código referente à implementação pode ser encontrado no arquivo ***ServidorHTTPEsp8266.ino***, o qual está devidamente comentado para melhor compreensão. 
 
 O servidor armazena uma pequena página web contento um título, um corpo textual, um arquivo de imagem, e um campo para envio das leituras feitas através do módulo. Como segue a imagem: 
 
@@ -66,9 +64,8 @@ A análise foi realizada utilizando um conjunto de soluções de console interat
 
 Em que sim\_reqs é a coluna com o número de requisições simultâneas feitas ao servidor, **taxa\_sucesso** é a coluna de conexões bem-sucedidas: 
 
-![](/img/Aspose.Words.33a3665f-147c-4636-b477-6d243817648b.008.png)
 
-𝑡𝑎𝑥𝑎 𝑑𝑒 𝑠𝑢𝑐𝑒𝑠𝑠𝑜 = $\frac{Respostas}{RequisiçõesEnviadas}$
+𝑡𝑎𝑥𝑎 𝑑𝑒 𝑠𝑢𝑐𝑒𝑠𝑠𝑜 = $$\frac{Respostas}{RequisiçõesEnviadas}$$
 
 
 ou  seja,  a  fração  de  respostas  recebidas  em  todas  as  requisições  enviadas  simultaneamente,  e **tempo\_decorr** é o tempo decorrido desde que a primeira requisição foi enviada até a última resposta não ser recebida. Isso de uma variedade de 1 até 100 requisições simultâneas, 5 vezes para cada sim\_req. 
